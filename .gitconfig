@@ -1,0 +1,29 @@
+[user]
+    email = david.hertenstein@gmail.com
+    name = davidh
+[core]
+    editor = vim
+    pager = less -FXR
+    excludesfile = ~/.gitignore
+[color]
+    ui = true
+[alias]
+    # Show all aliases
+    aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
+    # list all commits
+    list = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"
+    # Unstage changes from the index
+    unstage = reset HEAD --
+    # List all tags
+    tags = tag -l
+    # List all branches
+    branches = branch -av
+    # Start a new local repository and perform initial commit
+    this = !git init && git add . && git commmit -m \"init\"
+    # Save a repo as a tarball
+    export = archive -o latest.tar.gz -9 --prefix=latest/
+    # Remove excess metadata
+    trim = !git reflog expire --expire=now --all && git gc --prune=now
+
+[url "https://github.com/"]
+    insteadOf = gh:
