@@ -54,6 +54,7 @@ export ARCHFLAGS="-arch x86_64"
 
 ## Cheats
 alias pacman='sudo pacman'
+alias dnf='sudo dnf'
 
 ## Fun
 alias plz='sudo'
@@ -125,50 +126,6 @@ mktar () {
      *.tar)       tar cf  $1 $2;;
      *) echo "$1 is not a valid tar file"; return ;;
   esac
-}
-
-lf() {
-    if [ $# -eq 0 ]; then
-	for i in *; do
-	    stat -c "%a %U:%G %n - %F" $i
-	done
-
-      return
-  fi
-  A=0
-  STAT='stat -c "%a %U:%G %n - %F"'
-    while getopts ":aht" opt; do
-	case ${opt} in
-	    a ) A="1";;
-	    h) printf "Usage: $0 OPTIONS... DIR\n  Available Options:\n\t-a | --all\tShow all files/folders\n\t-t | --time\tShow timestamps for file\n"; return;;
-	    t ) STAT='stat -c "%a %U:%G %n - %F | Last Modified: %y"';;
-	    \? ) printf "Invalid option: -$OPTARG\nUsage: $0 OPTIONS... DIR\n  Available Options:\n\t-a\tShow all files/folders\n\t-t\tShow timestamps for file\n"; return;;
-	esac
-    done
-    shift $((OPTIND -1))
-    LFDIR=$1
-    if [ -z "$LFDIR" ]; then
-	LFDIR="."
-    fi
-    if [ "$A" = "1" ]; then
-        for i in "$LFDIR/.*"; do
-	    eval "${STAT} $i"
-	done
-    fi
-    for i in "$LFDIR/*"; do
-        eval "${STAT} $i"
-    done
-    unset A
-    unset STAT
-    unset LFDIR
-}
-
-cowtop() {
-  if [ $# -eq 0 ]; then
-    printf "A PID or Name is required\n"
-    return
-  fi
-  watch "ps -o pid,user,%mem,command ax | grep $1 | grep -v "grep" | sort -b -k3 -r | fmt -80 -s | $(shuf -n 1 -e cowsay cowthink) -$(shuf -n 1 -e b d g p s t w y) -f $(shuf -n 1 -e $(cowsay -l | tail -n +2)) -n"
 }
 
 ########################

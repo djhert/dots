@@ -48,15 +48,10 @@ fi
 
 #Links
 echo "Linking dots"
-rm -rf ~/.config/i3
-mklink i3 ~/.config/i3
 mklink .bashrc ~/.bashrc
 mklink .zshrc ~/.zshrc
 mklink .tmux.conf ~/.tmux.conf
 mklink .vimrc ~/.vimrc
-mklink .Xresources ~/.Xresources
-mklink .dunstrc ~/.dunstrc
-mklink .picom.conf ~/.picom.conf
 mklink .clang-format ~/.clang-format
 mklink .gitignore ~/.gitignore
 mklink .gitconfig ~/.gitconfig
