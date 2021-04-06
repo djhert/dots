@@ -27,7 +27,10 @@ fi
 
 export GOPATH=~/Development/Go/.go
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:~/.bin:~/.android-sdk/platform-tools:~/.android-sdk/tools:$GOBIN
+export ANDROID_SDK=~/.android-sdk
+export ANDROID_NDK=$ANDROID_SDK/ndk/23.0.7196353
+export ANDROID_NDK_HOME=$ANDROID_NDK
+export PATH=$PATH:~/.bin:$ANDROID_SDK/platform-tools:$ANDROID_SDK/tools:$GOBIN
 export WINEDEBUG=-all
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
@@ -37,6 +40,7 @@ export LANGUAGE=en_US.UTF-8
 export LC_TIME=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export TERM="xterm-256color"
+export PAGER=less
 
 ## Use Clang by default
 export CC='/usr/bin/clang'
@@ -67,7 +71,8 @@ alias pss="\ps aux --sort -rss | \head -1; \ps aux | \grep -v \grep"
 alias psw="\ps aux --sort -rss | \less"
 alias rm="\rm -i"
 alias mpa="\mpv --no-video"
-alias less="\less -FXR"
+alias less="\less -FXRQ"
+alias man="\man -P 'less -FXRQ'"
 
 ## Functions
 mkcd () {
@@ -156,6 +161,14 @@ lf() {
     unset A
     unset STAT
     unset LFDIR
+}
+
+cowtop() {
+  if [ $# -eq 0 ]; then
+    printf "A PID or Name is required\n"
+    return
+  fi
+  watch "ps -o pid,user,%mem,command ax | grep $1 | grep -v "grep" | sort -b -k3 -r | fmt -80 -s | $(shuf -n 1 -e cowsay cowthink) -$(shuf -n 1 -e b d g p s t w y) -f $(shuf -n 1 -e $(cowsay -l | tail -n +2)) -n"
 }
 
 ########################

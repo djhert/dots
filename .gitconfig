@@ -3,8 +3,10 @@
     name = davidh
 [core]
     editor = vim
-    pager = less -FXR
+    pager = less -FXRQ
     excludesfile = ~/.gitignore
+	quotepath = false
+	commitGraph = true
 [color]
     ui = true
 [alias]
@@ -27,3 +29,14 @@
 
 [url "https://github.com/"]
     insteadOf = gh:
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[receive]
+	advertisePushOptions = true
+[gc]
+	writeCommitGraph = true
+[init]
+	defaultBranch = devel

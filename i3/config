@@ -12,13 +12,13 @@ font pango:Roboto-Regular 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # Lock Screen
-bindsym $mod+l exec i3lock -t -e -i ~/Pictures/lockscreen.png
+bindsym $mod+l exec --no-startup-id $HOME/.config/i3/i3lock-blur.sh
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -nf '#F3F4F5' -nb '#1D1F21' -sb '#005577' -sf '#F3F4F5' -fn 'Roboto-10' -p 'Run:'"
@@ -103,11 +103,13 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'System Menu: ' -b 'Restart' 
 bindsym --release $mod+p exec --no-startup-id scrot -s $HOME/Pictures/`date +%Y-%m-%d_%H:%M:%S`.png
 
 # browser pop-ups
-for_window [window_role="pop-up"] floating enable
-for_window [title="Sidewise"] floating disable
+#for_window [window_role="pop-up"] floating enable
 
 #File Browser
 for_window [class="(?i)thunar"] floating enable
+
+# custom
+for_window [class="Color2"] floating enable
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -171,11 +173,11 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Autostart applications
-exec_always --no-startup-id nitrogen --restore
+#exec_always --no-startup-id nitrogen --restore
+exec_always --no-startup-id feh --bg-scale ~/.cache/wallpaper.jpg
 exec_always --no-startup-id numlockx on
-exec --no-startup-id picom -d :0 --config ~/.picom.conf
 exec --no-startup-id ~/.config/i3/layout.sh
 exec --no-startup-id blueberry-tray
 exec --no-startup-id steam-runtime -silent
-exec --no-startup-id gromit-mpx
 exec --no-startup-id dunst -conf ~/.dunstrc
+exec --no-startup-id discord --start-minimized
