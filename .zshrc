@@ -28,7 +28,8 @@ fi
 export GOPATH=~/Development/Go/.go
 export GOBIN=$GOPATH/bin
 export ANDROID_SDK=~/.android-sdk
-export ANDROID_NDK=$ANDROID_SDK/ndk/23.0.7196353
+export ANDROID_SDK_ROOT=$ANDROID_SDK
+export ANDROID_NDK=$ANDROID_SDK/ndk/22.1.7171670
 export ANDROID_NDK_HOME=$ANDROID_NDK
 export PATH=$PATH:~/.bin:$ANDROID_SDK/platform-tools:$ANDROID_SDK/tools:$GOBIN
 export WINEDEBUG=-all
@@ -53,8 +54,9 @@ export EDITOR='vim'
 export ARCHFLAGS="-arch x86_64"
 
 ## Cheats
-alias pacman='sudo pacman'
-alias dnf='sudo dnf'
+alias pacman='\sudo pacman'
+alias dnf='\sudo dnf'
+alias docker='\sudo docker'
 
 ## Fun
 alias plz='sudo'
